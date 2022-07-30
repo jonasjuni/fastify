@@ -8,7 +8,7 @@ export type AppOptions = {
 
 const app: FastifyPluginAsync<AppOptions> = async (
   fastify,
-  opts
+  opts,
 ): Promise<void> => {
   // Place here your custom code!
 

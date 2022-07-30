@@ -1,4 +1,5 @@
 import { FastifyPluginAsync } from 'fastify';
+import helmet from '@fastify/helmet';
 import mercuriusCodegen, { gql } from 'mercurius-codegen';
 import mercurius, { IResolvers } from 'mercurius';
 
@@ -20,6 +21,11 @@ const graphql: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
       },
     },
   };
+
+  fastify.register(helmet, {
+    contentSecurityPolicy:
+      process.env.NODE_ENV === 'production' ? undefined : false,
+  });
 
   fastify.register(mercurius, {
     schema,
